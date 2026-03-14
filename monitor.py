@@ -189,8 +189,17 @@ def main():
     log.info(f"Statut actuel :\n{current_status}")
 
     if previous_status is None:
-        log.info("Premier lancement — sauvegarde du statut initial.")
+        log.info("Premier lancement — sauvegarde du statut initial + mail de bienvenue.")
         save_status(current_status)
+        send_email(
+            subject="✅ Moniteur Fac-Habitat Saint-Jérôme — Système actif",
+            body=(
+                f"Le moniteur est opérationnel.\n"
+                f"La page sera vérifiée toutes les 2 heures.\n\n"
+                f"Statut initial enregistré :\n{current_status}\n\n"
+                f"Tu recevras un mail dès que ce statut change."
+            ),
+        )
         return
 
     if current_status != previous_status:
