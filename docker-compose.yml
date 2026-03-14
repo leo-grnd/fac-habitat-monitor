@@ -1,0 +1,16 @@
+services:
+  monitor:
+    build: .
+    container_name: fac-habitat-monitor
+    restart: unless-stopped
+    environment:
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASS=${SMTP_PASS}
+      - EMAIL_TO=${EMAIL_TO}
+    volumes:
+      - monitor-data:/app/data
+
+volumes:
+  monitor-data:
